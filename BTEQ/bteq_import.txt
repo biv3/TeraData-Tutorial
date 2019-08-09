@@ -1,0 +1,47 @@
+
+LOGON 10.74.161.248/TD_USER1,TD_USER1;
+
+SET session dateform=ansidate;   
+
+SEL date;   
+
+SEL time;   
+
+delete from tmp_emp; 
+
+.IF errorcode = 0 then .goto ins_tmp;
+
+CREATE TABLE TMP_EMP 
+ (
+  EMP_NO VARCHAR(16),  
+  POS VARCHAR(16),  
+  SAL VARCHAR(10) 
+);   
+
+.LABEL ins_tmp;
+
+select count(*) from TMP_emp;   
+
+.IMPORT vartext ','  file="d:\Users\hvaithee\Desktop\Training\bteq_input.txt", SKIP = 3
+
+.quiet on   
+
+.repeat 2
+
+
+USING 
+(
+   col1 varchar(16), 
+   col2 varchar(16), 
+   col3 VARCHAR(10)
+) INSERT INTO TMP_emp (emp_no, POS, sal)values (:col1, :col2, :col3);   
+
+.quiet off   
+
+select * from TMP_emp;   
+
+.QUIT ERRORCODE ; 
+
+.logoff;
+
+

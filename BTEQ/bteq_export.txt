@@ -1,0 +1,14 @@
+
+LOGON 10.74.161.248/TD_USER1,TD_USER1;
+
+.set separator ','
+
+.export REPORT file="C:\Users\hvaithee\Desktop\output.txt", LIMIT = 1
+
+select * from tmp_emp; 
+
+.export reset
+
+select * from employee_819;
+
+.exit;

@@ -1,0 +1,38 @@
+LOGON 10.74.161.248/TD_USER9,TD_USER9;
+
+database td_bim_fr_trng_db;
+
+.set SESSION transaction ANSI;
+
+select * from bteq_tbl;
+
+.IF errorcode = 3807 THEN .GOTO create_tbl;
+
+.IF activitycount > 1 THEN.GOTO insert_val2;
+
+
+.LABEL create_tbl;
+
+create table bteq_tbl
+(
+ name varchar(100),
+ T_date timestamp(6),
+ comments varchar(100)
+);
+ 
+.LABEL insert_val;
+
+insert into bteq_tbl 
+select * from prob_log1;
+
+.LABEL insert_val2;
+
+insert into bteq_tbl
+values('SHIV',current_timestamp(0),
+'rOW has been inserted');
+
+.export reset;
+
+.exit errorlevel;
+
+.logoff ;
