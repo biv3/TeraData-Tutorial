@@ -1,0 +1,62 @@
+LOGON 10.58.0.66/TD_USER1,TD_USER1;
+
+DATABASE TD_BIM_FR_TRNG_DB;
+ 
+select * from tbl_brand;
+
+DROP TABLE Tbl_Brand;
+
+DROP TABLE Tbl_brand_ERR1;
+
+DROP TABLE Tbl_brand_ERR2;
+
+
+CREATE MULTISET TABLE Tbl_brand
+( 
+	Brand_id VARCHAR(30) CHARACTER SET LATIN NOT CASESPECIFIC,
+	Brand_Name VARCHAR(30) CHARACTER SET LATIN NOT CASESPECIFIC,
+	Valid_from date format 'dd/mm/yyyy',
+	Valid_to date format 'dd/mm/yyyy',
+	isactive varchar(1)
+)
+PRIMARY INDEX ( Brand_id );
+
+SET RECORD VARTEXT ",";
+
+DEFINE 
+	Brand_id  (VARCHAR(30)),       
+	Brand_name (VARCHAR(30)),       
+	valid_from (varchar(10)),
+	valid_to (varchar(10)),
+	IsActive (VARCHAR(2))
+
+FILE=D:\Users\hvaithee\Documents\Hariharan\Teradata Software\Utilities\fload_file1.txt;
+ 
+BEGIN LOADING 
+	Tbl_brand
+ERRORFILES 
+	Tbl_brand_ERR1,
+	Tbl_brand_ERR2
+
+CHECKPOINT 1000;
+
+INSERT INTO Tbl_brand
+( 
+	Brand_id  ,
+	Brand_name ,
+	valid_from ,
+	valid_to, 
+	IsActive
+)
+VALUES 
+( 
+	:Brand_id, 
+	:Brand_name, 
+	:valid_from  (format 'dd/mm/yyyy'),
+	:valid_to  ( format 'dd/mm/yyyy'),
+	:IsActive
+) ;
+
+END LOADING ;
+
+LOGOFF ;

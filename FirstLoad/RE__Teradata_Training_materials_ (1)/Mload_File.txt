@@ -1,0 +1,11 @@
+1001|shiva|ram|23656.19|A01|rithik|BFS
+1002|raje|mukund|25876.20|A01|rithik|INS
+1003|divya|sundaram|123656|D01|rithik|LS
+1004|mohamed|noor|241656.19|C01|rithik|BFS
+1005|Antony|Mark|823656|D01|rithik|LS
+1006|latha|Charu|365641.00|C01|rithik|HC
+1007|linga|siva|123656.|B01|rithik|LS
+1008|krishna|ram|53656.58|A01|rithik|BFS
+1009|deva|brahma|63655.27|D01|rithik|HC
+1010|devi|gayathri|27658.98|C01|rithik|INS
+1011|baashaa|manick|89678.99|B01|rithik|HC

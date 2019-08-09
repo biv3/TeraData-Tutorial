@@ -1,0 +1,31 @@
+.LOGTABLE TD_BIM_FR_TRNG_DB.Mload_Log;
+
+.LOGON 10.58.0.66/TD_USER1,TD_USER1;
+
+
+alter table TD_BIM_FR_TRNG_DB.MLOAD_TABLE
+add phone_number varchar(10);
+
+
+.BEGIN MLOAD TABLES 
+		TD_BIM_FR_TRNG_DB.MLOAD_TABLE;
+
+.Layout SRCLAYOUT;
+.Field eid *  varchar(10);
+.Field Fone *  varchar (10);        
+
+.DML LABEL UPD;
+
+UPDATE TD_BIM_FR_TRNG_DB.MLOAD_TABLE
+SET  phone_number= cast(:fone as integer)
+WHERE enum = :eid;
+
+.IMPORT INFILE 'D:\Users\hvaithee\Documents\Hariharan\Teradata Software\Utilities\Mload_UPD_File.txt'
+LAYOUT SRCLAYOUT
+FORMAT VARTEXT ','
+APPLY UPD;
+
+.END MLOAD;
+
+.LOGOFF;
+
